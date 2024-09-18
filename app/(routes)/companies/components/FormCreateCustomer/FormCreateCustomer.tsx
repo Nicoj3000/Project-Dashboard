@@ -61,8 +61,8 @@ export function FormCreateCustomer(props: FormCreateCustomerProps) {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       axios.post("/api/company", values);
-      toast({ title: "Company created" });
       router.refresh();
+      toast({ title: "Company created" });
       setOpenModalCreate(false);
     } catch (error) {
       toast({

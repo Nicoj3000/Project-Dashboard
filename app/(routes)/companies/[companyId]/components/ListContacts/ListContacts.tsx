@@ -1,13 +1,12 @@
+
 import { redirect } from "next/navigation";
-
 import { db } from "@/lib/db";
-
-import { Contact2, Mail, Phone } from "lucide-react";
-
+import { Contact2, Mail, Phone, Pencil, Trash } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-
 import { ListContactsProps } from "./ListContacts.types";
 import { auth } from "@clerk/nextjs";
+import Link from "next/link";
+import axios from "axios";
 
 export async function ListContacts(props: ListContactsProps) {
   const { company } = props;
@@ -24,6 +23,16 @@ export async function ListContacts(props: ListContactsProps) {
       },
     },
   });
+
+  const handleDelete = async (contactId: string) => {
+    try {
+      await axios.delete(`/api/contacts/${contactId}`);
+      // Recargar la página para reflejar los cambios
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+    }
+  };
 
   if (contacts.length === 0) {
     return (
@@ -53,6 +62,10 @@ export async function ListContacts(props: ListContactsProps) {
               <a href={`mailto: ${contact.email}`} target="_blank">
                 <Mail className="w-4 h-4" />
               </a>
+              <Link href={`/contacts/${contact.id}`}>
+                <Pencil className="w-4 h-4" />
+              </Link>
+
             </div>
           </div>
           <Separator className="my-3" />
@@ -61,4 +74,3 @@ export async function ListContacts(props: ListContactsProps) {
     </div>
   );
 }
-

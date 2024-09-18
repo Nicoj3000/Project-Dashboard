@@ -47,9 +47,9 @@ export function FormContact(props: FormContactProps) {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       axios.post(`/api/company/${params.companyId}/contact`, values);
+      router.refresh();
       toast({ title: "Contacto creado" });
       setOpen(false);
-      router.refresh();
     } catch (error) {
       toast({
         title: "Ocurrio un error",
