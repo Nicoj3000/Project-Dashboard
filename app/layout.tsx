@@ -8,8 +8,9 @@ import "./globals.css";
 const noto = Noto_Sans_Display({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dashboard Companies Nicoj",
+  title: "Dashboard Companies - Nicoj",
   description: "Nicoj Dashboard Companies",
+ 
 };
 
 export default function RootLayout({
