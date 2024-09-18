@@ -16,6 +16,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
 
@@ -93,11 +100,25 @@ export function ContactForm(props: ContactFormProps) {
             name="role"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Role </FormLabel>
-                <FormControl>
-                  <Input placeholder="Role..." type="text" {...field} />
-                </FormControl>
-                <FormMessage />
+                <FormLabel>Rol</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Seleccione el cargo"></SelectValue>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Comercial">Comercial</SelectItem>
+                    <SelectItem value="CEO">CEO</SelectItem>
+                    <SelectItem value="Quality">Customer Servide</SelectItem>
+                    <SelectItem value="Analytics">Analytics</SelectItem>
+                    <SelectItem value="Other">Other...</SelectItem>
+                  </SelectContent>
+                  <FormMessage />
+                </Select>
               </FormItem>
             )}
           />
@@ -129,16 +150,14 @@ export function ContactForm(props: ContactFormProps) {
               </FormItem>
             )}
           />
-
         </div>
 
         <div className="flex justify-between items-center mt-3">
-        <Button type="submit">Edit contact</Button>
-        <Button type="button" variant="destructive" onClick={onDelete}>
+          <Button type="submit">Edit contact</Button>
+          <Button type="button" variant="destructive" onClick={onDelete}>
             Delete contact
           </Button>
-          </div>
-
+        </div>
       </form>
     </Form>
   );
